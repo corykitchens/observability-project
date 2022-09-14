@@ -13,13 +13,17 @@ spec:
     exporters:
       logging:
         loglevel: debug
+      jaeger:
+        endpoint: jaeger-collector.observability.svc:14250
+        tls:
+          insecure: true
     processors:
       batch:
     service:
       pipelines:
         traces:
           receivers: [otlp]
-          exporters: [logging]
+          exporters: [jaeger]
           processors: [batch]
         metrics:
           receivers: [otlp]
