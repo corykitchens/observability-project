@@ -1,0 +1,31 @@
+apiVersion: opentelemetry.io/v1alpha1
+kind: OpenTelemetryCollector
+metadata:
+  name: collector
+spec:
+  mode: sidecar
+  config: |
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+          http:
+    exporters:
+      logging:
+        loglevel: debug
+      jaeger:
+        endpoint: jaeger-collector.observability.svc:14250
+        tls:
+          insecure: true
+    processors:
+      batch:
+    service:
+      pipelines:
+        traces:
+          receivers: [otlp]
+          exporters: [jaeger]
+          processors: [batch]
+        metrics:
+          receivers: [otlp]
+          exporters: [logging]
+          processors: [batch]

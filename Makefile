@@ -30,3 +30,12 @@ install:
 
 uninstall:
 	helm uninstall app
+
+jaeger:
+	kubectl port-forward --namespace observability svc/jaeger-query 16686
+
+local:
+	opentelemetry-instrument \
+	--traces_exporter console \
+	--metrics_exporter console \
+	flask run
