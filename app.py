@@ -2,13 +2,15 @@ import json
 from random import randint
 
 from flask import Flask, request, jsonify
-from opentelemetry import trace
+from opentelemetry import trace, metrics
 from opentelemetry.trace import SpanKind
 
 from common import get_ip, postman_echo
 
 # Acquire tracer
 tracer = trace.get_tracer(__name__)
+
+
 app = Flask(__name__)
 
 

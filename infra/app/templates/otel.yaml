@@ -8,15 +8,20 @@ spec:
     receivers:
       otlp:
         protocols:
+          grpc:
           http:
-    processors:
-      batch:
     exporters:
       logging:
         loglevel: debug
+    processors:
+      batch:
     service:
       pipelines:
         traces:
           receivers: [otlp]
-          processors: [batch]
           exporters: [logging]
+          processors: [batch]
+        metrics:
+          receivers: [otlp]
+          exporters: [logging]
+          processors: [batch]
