@@ -24,3 +24,9 @@ run:
 	docker run --rm --name="$(APP_NAME)" -p 5000:5000 $(APP_NAME):latest
 
 clean: stop rm
+
+install:
+	helm upgrade --install app infra/app
+
+uninstall:
+	helm uninstall app
