@@ -30,3 +30,9 @@ install:
 
 uninstall:
 	helm uninstall app
+
+local:
+	opentelemetry-instrument \
+	--traces_exporter console \
+	--metrics_exporter console \
+	flask run
