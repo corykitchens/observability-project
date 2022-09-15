@@ -106,6 +106,12 @@ helm repo add bitnami https://charts.bitnami.com/bitnami
 helm install my-release bitnami/kube-prometheus
 ```
 
+**Jaeger/OTEL Collector Deployments**
+
+```sh
+kubectl apply -f infra/prereqs/
+```
+
 **Build the image**
 
 ```
