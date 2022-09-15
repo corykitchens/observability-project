@@ -34,6 +34,12 @@ uninstall:
 jaeger:
 	kubectl port-forward --namespace observability svc/jaeger-query 16686
 
+prometheus:
+	kubectl port-forward --namespace default svc/prometheus-kube-prometheus-prometheus 9090:9090
+
+app:
+	kubectl port-forward --namespace default svc/app 5000
+
 local:
 	opentelemetry-instrument \
 	--traces_exporter console \
