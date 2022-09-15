@@ -6,13 +6,13 @@ The purpose of this project is to demonstrate a basic implementation of observab
 
 ## Tech Stack
 
-- Python/Flask for application
-- OpenTelemetry Python SDK for instrumenting telemetry data (tracers, signals, logs)
-- OpenTelemetry Collector for receiving/processing/exporting telemetry data
-- Jaeger for Tracer Monitoring
-- Prometheus for Metrics
-- Grafana/Loki for centralized Logging (not implemented)
-- Helm
+- [Flask](https://flask.palletsprojects.com/en/2.2.x/)
+- [OpenTelemetry for telementry data](https://opentelemetry.io/)
+- [OpenTelemetry Collector for receiving/processing/exporting telemetry data](https://github.com/open-telemetry/opentelemetry-operator)
+- [Jaeger for Tracer Monitoring](https://www.jaegertracing.io/)
+- [Prometheus for Metrics](https://prometheus.io/)
+- [GrafanaLoki for centralized Logging](https://grafana.com/)
+- [Helm](https://helm.sh/)
 
 ## High Level Architecture
 
@@ -20,11 +20,44 @@ The purpose of this project is to demonstrate a basic implementation of observab
 
 ## Implemented Functionality
 
-TODO
+**Infrastructure**
+
+- Local kind cluster running various services for observability (OTEL, Prometheus, Jaeger)
+
+**Trace**
+
+- Trace/Spans created/generated throughout the lifecycle of Application request/response
+- App tracers shipped to OTEL Collector
+- OTEL Collector shipping traces to Jaeger
+- Traces viewable in Jaeger
+
+**Metric**
+
+- A Request Count Metric generated
+- Application Metric + System Level metrics shipped to OTEL Collector
+- OTEL Collector shipping metrics to Prometheus
+- Metrics viewable in Prometheus
 
 ## Functionality Not Implemented
 
-- Logging Telemtry in Application
+**App**
+
+- Test coverage :)
+
+**Traces**
+
+- Injecting Service Name in Tracer
+
+**Metrics**
+
+- Counter Metric for successful/unsuccesful requests
+- Histogram for some higher-level cardinality (user-agent, location, payload) etc
+
+**Logging**
+
+- Implement OTEL Logging APIs
+- Shipping logs to OTEL Collector
+- Shipping logs from OTEL Collector to Loki/Grafana
 - Grafana/Loki Deployment
 
 ## Production Considerations
